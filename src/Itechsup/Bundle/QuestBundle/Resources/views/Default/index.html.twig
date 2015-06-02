@@ -1,11 +1,16 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
 <h1>{{ questionnaire.titre }}</h1>
+
 <ul>
-    {% for questionnaire.categories as categorie %}
+    {% for categorie in questionnaire.categories %}
         <li> {{ categorie.libelle }} </li>
         <ul>
-            {% for categorie.questions as question %}
+            {% for question in categorie.questions %}
                 <li> {{ question.texte }} </li>
             {% endfor %}
         </ul>
     {% endfor %}
 </ul>
+{% endblock %}

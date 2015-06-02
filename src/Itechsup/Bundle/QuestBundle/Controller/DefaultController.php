@@ -15,6 +15,7 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $questionnaire = $this->getDoctrine()->getRepository('ItechsupQuestBundle:Questionnaire')->find(2);
+        
         return array('questionnaire' => $questionnaire);
     }
 }
