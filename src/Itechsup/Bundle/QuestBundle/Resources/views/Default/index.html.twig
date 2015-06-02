@@ -1,0 +1,11 @@
+<h1>{{ questionnaire.titre }}</h1>
+<ul>
+    {% for questionnaire.categories as categorie %}
+        <li> {{ categorie.libelle }} </li>
+        <ul>
+            {% for categorie.questions as question %}
+                <li> {{ question.texte }} </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</ul>

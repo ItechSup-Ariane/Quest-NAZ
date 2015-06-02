@@ -1,0 +1,5 @@
+itechsup_quest:
+    resource: "@ItechsupQuestBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
