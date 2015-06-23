@@ -1,16 +1,23 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-<h1>{{ questionnaire.titre }}</h1>
-
-<ul>
-    {% for categorie in questionnaire.categories %}
-        <li> {{ categorie.libelle }} </li>
+    <h1>{{ questionnaire.titre }}</h1>
+    <form method="post">
         <ul>
-            {% for question in categorie.questions %}
-                <li> {{ question.texte }} </li>
+            {% for categorie in questionnaire.categories %}
+                <fieldset>
+                <li> {{ categorie.libelle }} </li>
+                <ul>
+                    {% for question in categorie.questions %}
+                        <li> {{ question.texte }} </li>
+                        {% for reponse in question.reponses %}
+                            <input type="{{ type|default('radio') }}" name="{{ reponse.id }}" value="{{ reponse.note }}"/> {{ reponse.note }}    
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+                </fieldset>
             {% endfor %}
         </ul>
-    {% endfor %}
-</ul>
+        <input type="submit" value="Envoyez le formulaire"/>
+    </form>
 {% endblock %}

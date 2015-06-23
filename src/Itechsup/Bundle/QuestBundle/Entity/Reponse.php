@@ -37,7 +37,9 @@ class Reponse
      */
     private $question;
 
-    
+    public function __construct() {
+        
+    }
     
     
     /**
@@ -73,5 +75,28 @@ class Reponse
     public function getNote()
     {
         return $this->note;
+    }
+    
+    /**
+    * Set question
+    *
+    * @param \Itechsup\Bundle\QuestBundle\Entity\Question $question
+    * @return Question
+    */
+    public function setQuestion(\Itechsup\Bundle\QuestBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+    
+    /**
+    * Get question
+    *
+    * @return \Itechsup\Bundle\QuestBundle\Entity\Question 
+    */
+    public function getQuestion()
+    {
+        return $this->question;
     }
 }
