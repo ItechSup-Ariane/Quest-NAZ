@@ -109,25 +109,25 @@ class Question
     }
 
     /**
-     * Set reponse
+     * Set reponses
      *
-     * @param \Itechsup\Bundle\QuestBundle\Entity\Reponse $reponse
+     * @param \Itechsup\Bundle\QuestBundle\Entity\Reponse $reponses
      * @return Question
      */
-    public function setReponse(\Itechsup\Bundle\QuestBundle\Entity\Reponse $reponse)
+    public function setReponses(\Itechsup\Bundle\QuestBundle\Entity\Reponse $reponses)
     {
-        $this->reponse = $reponse;
+        $this->reponses = $reponses;
 
         return $this;
     }
 
     /**
-     * Get reponse
+     * Get reponses
      *
      * @return \Itechsup\Bundle\QuestBundle\Entity\Reponse 
      */
-    public function getReponse()
+    public function getReponses()
     {
-        return $this->reponse;
+        return $this->reponses;
     }
 }
