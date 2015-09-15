@@ -4,7 +4,7 @@
     <h1>{{ questionnaire.titre }}</h1>
     <form method="post">
         <ul>
-            {% for categorie in questionnaire.categories %}
+            {% for categorie in questionnaire.categories %}    
                 <fieldset>
                 <li> {{ categorie.libelle }} </li>
                 <ul>
@@ -12,6 +12,7 @@
                         <li> {{ question.texte }} </li>
                         {% for reponse in question.reponses %}
                             <input type="{{ type|default('radio') }}" name="{{ reponse.id }}" value="{{ reponse.note }}"/> {{ reponse.note }}    
+                            
                         {% endfor %}
                     {% endfor %}
                 </ul>
@@ -20,4 +21,5 @@
         </ul>
         <input type="submit" value="Envoyez le formulaire"/>
     </form>
+    {{ questionnaire.bind() }}
 {% endblock %}

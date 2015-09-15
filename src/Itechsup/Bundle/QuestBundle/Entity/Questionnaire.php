@@ -110,4 +110,14 @@ class Questionnaire
     {
         return $this->categories;
     }
+    
+    // A modifier !!!!!!
+    public function isValide(){
+        return true;
+    }
+    
+    public function bind()
+    {
+        
+    }
 }

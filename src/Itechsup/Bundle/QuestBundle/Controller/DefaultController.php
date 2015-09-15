@@ -18,4 +18,11 @@ class DefaultController extends Controller
         
         return array('questionnaire' => $questionnaire);
     }
+    
+    public function bind()
+    {
+        $this->getRequest()->request->get('questionnaire');
+    }
+    
+    
 }
