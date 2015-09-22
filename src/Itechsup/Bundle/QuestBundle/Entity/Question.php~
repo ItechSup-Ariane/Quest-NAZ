@@ -1,85 +1,35 @@
 <?php
-
 namespace Itechsup\Bundle\QuestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Question
- *
- * @ORM\Table()
  * @ORM\Entity
  */
-class Question
-{
+class Question {
+    
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      */
     private $texte;
-
     /**
      *
-     * @var Categorie
-     * 
      * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="questions")
-     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
      */
     private $categorie;
-    
     /**
-     * @ORM\OneToOne(targetEntity="Reponse", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     *
+     * @ORM\OneToMany(targetEntity="Reponse", mappedBy="question")
      */
-    private $reponse;
-    
+    private $reponses;
     
     public function __construct() {
-        
     }
     
-    
-    
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set texte
-     *
-     * @param string $texte
-     * @return Question
-     */
-    public function setTexte($texte)
-    {
-        $this->texte = $texte;
-
-        return $this;
-    }
-
-    /**
-     * Get texte
-     *
-     * @return string 
-     */
-    public function getTexte()
-    {
-        return $this->texte;
-    }
 }

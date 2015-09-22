@@ -1,15 +1,17 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Questionnaire creation</h1>
+<form action="..." method="POST" {{ form_enctype(form) }}>
+    {# affiche l'unique champ de la tâche : description #}
+    {{ form_row(form.titre) }}
 
-    {{ form(form) }}
+    <h3>Categories</h3>
+    <ul class="categories">
+        {# itère sur chaque tag existant et affiche son unique champ : name #}
+        {% for categorie in form.categories %}
+            <li>{{ form_row(categorie.libelle) }}</li>
+        {% endfor %}
+    </ul>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('questionnaire') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
-{% endblock %}
+    {{ form_rest(form) }}
+    {# ... #}
+</form>

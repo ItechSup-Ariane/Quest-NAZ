@@ -5,24 +5,49 @@ namespace Itechsup\Bundle\QuestBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
+/**
+ * default controller
+ * 
+ * @Route("/Accueil")
+ */
 class DefaultController extends Controller
 {
     /**
+     * Type d'accès
+     *
      * @Route("/")
-     * @Template()
+     * @Method("GET")
+     * @Template("ItechsupQuestBundle:Default:index.html.twig")
      */
     public function indexAction()
     {
-        $questionnaire = $this->getDoctrine()->getRepository('ItechsupQuestBundle:Questionnaire')->find(2);
-        
-        return array('questionnaire' => $questionnaire);
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('ItechsupQuestBundle:Questionnaire')->findAll();
+
+        return array(
+            'entities' => $entities,
+        );
     }
     
-    public function bind()
+    /**
+     * Type d'accès
+     *
+     * @Route("/utilisateur")
+     * @Method("GET")
+     * @Template("ItechsupQuestBundle:Questionnaire:index.html.twig")
+     */
+    public function accueilUtilisateur()
     {
-        $this->getRequest()->request->get('questionnaire');
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('ItechsupQuestBundle:Questionnaire')->findAll();
+
+        return array(
+            'entities' => $entities,
+        );
     }
-    
-    
+            
 }

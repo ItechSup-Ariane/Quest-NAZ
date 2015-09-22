@@ -5,50 +5,48 @@ namespace Itechsup\Bundle\QuestBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
- * Questionnaire
- *
- * @ORM\Table()
  * @ORM\Entity
  */
-class Questionnaire
-{
+class Questionnaire {
+    
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
+    protected $id;
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="titre", type="string", length=50)
+     * @ORM\Column(type="string", length=100)
      */
-    private $titre;
-
-
+    protected $titre;
     /**
      *
-     * @var ArrayCollection
-     * 
      * @ORM\OneToMany(targetEntity="Categorie", mappedBy="questionnaire")
      */
-    private $categories;
-    
-    public function __construct() {
+    protected $categories;
+
+    public function __construct()
+    {
         $this->categories = new ArrayCollection();
     }
-    
-    public function addCategorie($key, $categorie){
-        $this->categories[$key] = $categorie;
-        
+
+    public function getTitre()
+    {
+        return $this->titre;
     }
+
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+    }
+
+    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,68 +54,36 @@ class Questionnaire
     }
 
     /**
-     * Set titre
+     * Add category
      *
-     * @param string $titre
+     * @param \Itechsup\Bundle\QuestBundle\Entity\categories $category
+     *
      * @return Questionnaire
      */
-    public function setTitre($titre)
+    public function addCategory(\Itechsup\Bundle\QuestBundle\Entity\categories $category)
     {
-        $this->titre = $titre;
+        $this->categories[] = $category;
 
         return $this;
     }
 
     /**
-     * Get titre
+     * Remove category
      *
-     * @return string 
+     * @param \Itechsup\Bundle\QuestBundle\Entity\categories $category
      */
-    public function getTitre()
+    public function removeCategory(\Itechsup\Bundle\QuestBundle\Entity\categories $category)
     {
-        return $this->titre;
-    }
-
-    /**
-     * Add categories
-     *
-     * @param \Itechsup\Bundle\QuestBundle\Entity\Categorie $categories
-     * @return Questionnaire
-     */
-    public function addCategory(\Itechsup\Bundle\QuestBundle\Entity\Categorie $categories)
-    {
-        $this->categories[] = $categories;
-
-        return $this;
-    }
-
-    /**
-     * Remove categories
-     *
-     * @param \Itechsup\Bundle\QuestBundle\Entity\Categorie $categories
-     */
-    public function removeCategory(\Itechsup\Bundle\QuestBundle\Entity\Categorie $categories)
-    {
-        $this->categories->removeElement($categories);
+        $this->categories->removeElement($category);
     }
 
     /**
      * Get categories
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategories()
     {
         return $this->categories;
-    }
-    
-    // A modifier !!!!!!
-    public function isValide(){
-        return true;
-    }
-    
-    public function bind()
-    {
-        
     }
 }

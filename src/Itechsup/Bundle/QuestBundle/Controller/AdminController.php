@@ -21,7 +21,7 @@ class AdminController extends Controller
     /**
      * Lists all Questionnaire entities.
      *
-     * @Route("/", name="admin")
+     * @Route("/", name="questionnaire")
      * @Method("GET")
      * @Template()
      */

@@ -1,61 +1,44 @@
 <?php
-
 namespace Itechsup\Bundle\QuestBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Question
- *
- * @ORM\Table()
  * @ORM\Entity
  */
-class Question
-{
+class Question {
+    
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="texte", type="string", length=255)
+     * @ORM\Column(type="string", length=100)
      */
     private $texte;
-
     /**
      *
-     * @var Categorie
-     * 
      * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="questions")
-     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
      */
     private $categorie;
-    
     /**
      *
-     * @var ArrayCollection
-     * 
      * @ORM\OneToMany(targetEntity="Reponse", mappedBy="question")
      */
     private $reponses;
-    
     
     public function __construct() {
         $this->reponses = new ArrayCollection();
     }
     
-    
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,6 +49,7 @@ class Question
      * Set texte
      *
      * @param string $texte
+     *
      * @return Question
      */
     public function setTexte($texte)
@@ -78,7 +62,7 @@ class Question
     /**
      * Get texte
      *
-     * @return string 
+     * @return string
      */
     public function getTexte()
     {
@@ -89,6 +73,7 @@ class Question
      * Set categorie
      *
      * @param \Itechsup\Bundle\QuestBundle\Entity\Categorie $categorie
+     *
      * @return Question
      */
     public function setCategorie(\Itechsup\Bundle\QuestBundle\Entity\Categorie $categorie = null)
@@ -101,7 +86,7 @@ class Question
     /**
      * Get categorie
      *
-     * @return \Itechsup\Bundle\QuestBundle\Entity\Categorie 
+     * @return \Itechsup\Bundle\QuestBundle\Entity\Categorie
      */
     public function getCategorie()
     {
@@ -109,22 +94,33 @@ class Question
     }
 
     /**
-     * Set reponses
+     * Add reponse
      *
-     * @param \Itechsup\Bundle\QuestBundle\Entity\Reponse $reponses
+     * @param \Itechsup\Bundle\QuestBundle\Entity\Reponse $reponse
+     *
      * @return Question
      */
-    public function setReponses(\Itechsup\Bundle\QuestBundle\Entity\Reponse $reponses)
+    public function addReponse(\Itechsup\Bundle\QuestBundle\Entity\Reponse $reponse)
     {
-        $this->reponses = $reponses;
+        $this->reponses[] = $reponse;
 
         return $this;
     }
 
     /**
+     * Remove reponse
+     *
+     * @param \Itechsup\Bundle\QuestBundle\Entity\Reponse $reponse
+     */
+    public function removeReponse(\Itechsup\Bundle\QuestBundle\Entity\Reponse $reponse)
+    {
+        $this->reponses->removeElement($reponse);
+    }
+
+    /**
      * Get reponses
      *
-     * @return \Itechsup\Bundle\QuestBundle\Entity\Reponse 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getReponses()
     {

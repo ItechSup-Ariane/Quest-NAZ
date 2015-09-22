@@ -11,7 +11,7 @@ use Itechsup\Bundle\QuestBundle\Entity\Questionnaire;
 use Itechsup\Bundle\QuestBundle\Form\QuestionnaireType;
 
 /**
- * Questionnaire controller.
+ * questionnaire controller.
  *
  * @Route("/questionnaire")
  */

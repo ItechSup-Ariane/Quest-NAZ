@@ -16,7 +16,7 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('libelle')
-            ->add('questionnaire', null, array('property' => 'titre'))
+            ->add('questionnaire')
         ;
     }
     

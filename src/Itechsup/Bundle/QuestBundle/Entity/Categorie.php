@@ -1,65 +1,45 @@
 <?php
-
 namespace Itechsup\Bundle\QuestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+
 /**
- * Categorie
- *
- * @ORM\Table()
  * @ORM\Entity
  */
-class Categorie
-{
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
+class Categorie{
+    
+     /**
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
-     * @var string
-     *
-     * @ORM\Column(name="libelle", type="string", length=35)
+     * @ORM\Column(type="string", length=100)
      */
     private $libelle;
-
     /**
      *
-     * @var Questionnaire
-     * 
+     * @ORM\OneToMany(targetEntity="Question", mappedBy="categorie")
+     */
+    private $questions;
+    /**
+     *
      * @ORM\ManyToOne(targetEntity="Questionnaire", inversedBy="categories")
-     * @ORM\JoinColumn(name="questionnaire_id", referencedColumnName="id")
      */
     private $questionnaire;
     
     
-    /**
-     *
-     * @var ArrayCollection
-     * 
-     * @ORM\OneToMany(targetEntity="Question", mappedBy="categorie")
-     */
-    private $questions;
-    
-
     public function __construct() {
         $this->questions = new ArrayCollection();
     }
-      
-    public function addQuestion($key, $question){
-        $this->questions[$key] = $question;
-        
-    }
     
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,6 +50,7 @@ class Categorie
      * Set libelle
      *
      * @param string $libelle
+     *
      * @return Categorie
      */
     public function setLibelle($libelle)
@@ -82,7 +63,7 @@ class Categorie
     /**
      * Get libelle
      *
-     * @return string 
+     * @return string
      */
     public function getLibelle()
     {
@@ -90,9 +71,44 @@ class Categorie
     }
 
     /**
+     * Add question
+     *
+     * @param \Itechsup\Bundle\QuestBundle\Entity\Question $question
+     *
+     * @return Categorie
+     */
+    public function addQuestion(\Itechsup\Bundle\QuestBundle\Entity\Question $question)
+    {
+        $this->questions[] = $question;
+
+        return $this;
+    }
+
+    /**
+     * Remove question
+     *
+     * @param \Itechsup\Bundle\QuestBundle\Entity\Question $question
+     */
+    public function removeQuestion(\Itechsup\Bundle\QuestBundle\Entity\Question $question)
+    {
+        $this->questions->removeElement($question);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
+
+    /**
      * Set questionnaire
      *
      * @param \Itechsup\Bundle\QuestBundle\Entity\Questionnaire $questionnaire
+     *
      * @return Categorie
      */
     public function setQuestionnaire(\Itechsup\Bundle\QuestBundle\Entity\Questionnaire $questionnaire = null)
@@ -105,50 +121,10 @@ class Categorie
     /**
      * Get questionnaire
      *
-     * @return \Itechsup\Bundle\QuestBundle\Entity\Questionnaire 
+     * @return \Itechsup\Bundle\QuestBundle\Entity\Questionnaire
      */
     public function getQuestionnaire()
     {
         return $this->questionnaire;
-    }
-
-    /**
-     * Remove questions
-     *
-     * @param \Itechsup\Bundle\QuestBundle\Entity\Question $questions
-     */
-    public function removeQuestion(\Itechsup\Bundle\QuestBundle\Entity\Question $questions)
-    {
-        $this->questions->removeElement($questions);
-    }
-
-    /**
-     * Get questions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getQuestions()
-    {
-        return $this->questions;
-    }
-
-    /**
-     * Remove commentaires
-     *
-     * @param \Itechsup\Bundle\QuestBundle\Entity\Commentaire $commentaires
-     */
-    public function removeCommentaire(\Itechsup\Bundle\QuestBundle\Entity\Commentaire $commentaires)
-    {
-        $this->commentaires->removeElement($commentaires);
-    }
-
-    /**
-     * Get commentaires
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCommentaires()
-    {
-        return $this->commentaires;
     }
 }
